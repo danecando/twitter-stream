@@ -1,20 +1,19 @@
 'use strict';
 
 var path = require('path');
-var gulp = require('gulp'),
-  browserify = require('browserify'),
-  source = require('vinyl-source-stream'),
-  buffer = require('vinyl-buffer'),
-  sourcemaps = require('gulp-sourcemaps'),
-  autoprefixer = require('gulp-autoprefixer'),
-  minifycss = require('gulp-minify-css'),
-  sass = require('gulp-sass'),
-  uglify = require('gulp-uglify'),
-  reactify = require('reactify'),
-  del = require('del'),
-  livereload = require('gulp-livereload'),
-  babelify = require('babelify'),
-  nodemon = require('gulp-nodemon');
+var gulp = require('gulp');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
+var minifycss = require('gulp-minify-css');
+var sass = require('gulp-sass');
+var uglify = require('gulp-uglify');
+var ractivate = require('ractivate');
+var del = require('del');
+var livereload = require('gulp-livereload');
+var nodemon = require('gulp-nodemon');
 
 
 var AUTOPREFIXER_BROWSERS = [
@@ -40,17 +39,30 @@ gulp.task('styles', function() {
 });
 
 
-gulp.task('client', function() {
-  browserify('./client/app.js')
-    .transform(babelify)
-    .transform(reactify)
-    .bundle()
-    .pipe(source('bundle.js'))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(uglify())
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./public/assets/js'));
+gulp.task('client', ['site', 'feed']);
+
+gulp.task('site', function() {
+  browserify('./client/site/index.js')
+      .bundle()
+      .pipe(source('site.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(uglify())
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('./public/assets/js'));
+});
+
+
+gulp.task('feed', function() {
+  browserify('./client/feed/index.js')
+      .transform({ extensions: [ '.ract' ] }, ractivate)
+      .bundle()
+      .pipe(source('feed.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(uglify())
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('./public/assets/js'));
 });
 
 gulp.task('nodemon', function() {
@@ -85,8 +97,7 @@ gulp.task('watch', function() {
     script: './index.js',
     ext: 'html js',
     ignore: [
-      'node_modules/',
-      'public/'
+      'node_modules/'
     ]
   }).on('restart', livereload.changed);
 });

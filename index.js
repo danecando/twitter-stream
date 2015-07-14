@@ -1,8 +1,10 @@
-require('babel/register');
 
-var app = require('./server');
+require('dotenv').load();
 
-var server = app.listen('1338', function() {
-  var port = server.address().port;
-  console.log('Listening at http://localhost:%s', port);
+var debug = require('debug')('ts:server');
+var server = require('./server');
+
+server.listen('1338', function() {
+  var port = this.address().port;
+  debug('Listening at http://localhost:%s', port);
 });
