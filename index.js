@@ -1,10 +1,11 @@
+'use strict';
 
 require('dotenv').load();
 
-var debug = require('debug')('ts:server');
-var server = require('./server');
+var debug = require('debug')('ts:api');
+var api = require('./api');
 
-server.listen('1338', function() {
+api.listen('1338', function() {
   var port = this.address().port;
   debug('Listening at http://localhost:%s', port);
 });

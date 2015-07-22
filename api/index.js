@@ -1,9 +1,8 @@
 var express = require('express');
-var hbs = require('hbs');
-var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var Twit = require('twit');
 var debug = require('debug')('ts:server');
 var path = require('path');
 
@@ -13,9 +12,15 @@ var router = require('./routes');
 var app = express();
 
 
-// Views
-app.set('view engine', 'hbs');
-app.set('views', __dirname + '/views');
+// Setup & store twitter on application
+var T = new Twit({
+  consumer_key: 'C7jS0gKtt8atFsvJN0ulRm6te',
+  consumer_secret: 'SFNNPSgJ3r7M3NwNyg2qt2K5Ro2uy1Na7dPmdHU6UlIcH4c5sg',
+  access_token: '1093412383-8AAsPvpoH2fs6Cl8lr5QUMYp4ClQEMIBBpvVxW9',
+  access_token_secret: 'yo1LBDvFMBg2GqjA9a773mgjGKwIFCG0lxi013oW0h9LL'
+});
+
+app.locals.T = T;
 
 
 // Middleware
@@ -33,8 +38,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-// Routes
-app.use('/', express.static(path.dirname(require.main.filename) + '/public'));
+// web directory
+app.use('/', express.static(path.dirname(require.main.filename) + '/www'));
+
+// api routes
 app.use('/', router);
 
 
