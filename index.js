@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').load();
+//require('dotenv').load();
 
 var http = require('http');
 var api = require('./api');
