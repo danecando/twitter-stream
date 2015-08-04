@@ -40,7 +40,7 @@ var Stream = React.createClass({
     // page title
     document.title = 'Streaming tweets via: #BocaJS';
 
-    var socket = io.connect('http://localhost:3100');
+    var socket = io.connect('http://twitter-stream.dane.link:5000');
 
     socket.on('newTweet', function(tweet) {
       var tweets = self.state.tweets;
