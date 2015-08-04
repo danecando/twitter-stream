@@ -30,15 +30,13 @@ var api = express();
 var io = socket();
 api.locals.io = io;
 
-console.log(process.env.T_CONSUMER_KEY);
-
 // twitter api
 var T = new Twit({
   consumer_key: process.env.T_CONSUMER_KEY,
   consumer_secret: process.env.T_CONSUMER_SECRET,
+  access_token: process.env.T_ACCESS_TOKEN,
+  access_token_secret: process.env.T_ACCESS_TOKEN_SECRET,
   app_only_auth: true
-  //access_token: process.env.T_ACCESS_TOKEN,
-  //access_token_secret: process.env.T_ACCESS_TOKEN_SECRET
 });
 api.locals.T = T;
 
