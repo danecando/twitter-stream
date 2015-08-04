@@ -30,6 +30,8 @@ var api = express();
 var io = socket();
 api.locals.io = io;
 
+console.log(process.env.T_CONSUMER_KEY);
+
 // twitter api
 var T = new Twit({
   consumer_key: process.env.T_CONSUMER_KEY,
