@@ -38,21 +38,9 @@ var T = new Twit({
   access_token_secret: process.env.T_ACCESS_TOKEN_SECRET,
   app_only_auth: true
 });
+
 api.locals.T = T;
 
-
-// stream of #bocajs tweets
-var stream = T.stream('statuses/filter', { track: '#bocajs' });
-
-// listen for tweet events
-stream.on('tweet', function(tweet) {
-  io.emit('newTweet', tweet);
-});
-
-// catch error events
-stream.on('error', function(err) {
-  console.error(err);
-});
 
 // Middleware
 api.use(bodyParser.json());
