@@ -1,29 +1,44 @@
 'use strict';
 
+/**
+ * Feed Component displays lists of tweets
+ * @type {*|exports|module.exports}
+ */
+
 var React = require('react');
+var Tweet = require('./Tweet.react');
 
 var Feed = React.createClass({
 
-  getTweets: function() {
-
-    var location = window.location.href;
-
-    this.setState({ tweets: [location] });
-
+  /**
+   * Re-render when new tweets arrive
+   *
+   * @param nextProps
+   */
+  componentWillReceiveProps: function(nextProps) {
+    var tweets = nextProps.tweets;
+    this.setState({ tweets: tweets });
   },
 
   getInitialState: function() {
-    return { tweets: [] };
-  },
-
-  componentDidMount: function() {
-    this.getTweets();
+    return { tweets: this.props.tweets };
   },
 
   render: function() {
+
+    var tweetNodes = this.state.tweets.map(function(tweet) {
+      return (
+          <li className="tweet" key={tweet.id}>
+            <Tweet tweet={tweet} />
+          </li>
+      );
+    });
+
     return (
-        <div className="tweet-feed">
-          <h1>{this.props.tag}</h1>
+        <div id="tweet-feed">
+          <ol className="tweets">
+            {tweetNodes}
+          </ol>
         </div>
     );
   }

@@ -1,4 +1,5 @@
 'use strict';
+
 /**
  * Header Component
  * @since 1.0.0
@@ -13,7 +14,6 @@ var Header = React.createClass({
 
   /**
    * Executes hash tag link with enter key on tag input
-   * @todo possibly add to list of most used hash tags
    * @param event
    */
   hashInputSubmit: function(event) {
@@ -29,7 +29,8 @@ var Header = React.createClass({
    * @param event
    */
   hashInputChange: function(event) {
-    this.setState({ hashLink: event.target.value });
+    var tag = encodeURIComponent(event.target.value);
+    this.setState({ hashLink: tag });
   },
 
   /**
@@ -50,7 +51,7 @@ var Header = React.createClass({
         <header id="app-header">
           <div className="contain">
             <section className="site-title">
-              <h2>Node4U Twitter Stream</h2>
+              <h2>Node4U Twitter Feed</h2>
             </section>
             <section className="app-nav">
               <nav className="nav">
@@ -58,13 +59,15 @@ var Header = React.createClass({
                   <Link to="/" className="btn btn-home">Home</Link>
                 </div>
                 <div className="hash-nav">
-                  <input
-                      id="hash-link-input"
-                      type="text"
-                      onChange={this.hashInputChange}
-                      onKeyDown={this.hashInputSubmit}
-                      placeholder="hashtag"/>
-                  <Link id="hash-link" to={hashLink}>Stream</Link>
+                  <div className="uk-form-icon">
+                    <span className="hash-mark">#</span>
+                    <input
+                        id="hash-link-input"
+                        type="text"
+                        onChange={this.hashInputChange}
+                        onKeyDown={this.hashInputSubmit}
+                        placeholder="hashtag"/>                    </div>
+                  <Link id="hash-link" to={hashLink}>Find</Link>
                 </div>
               </nav>
             </section>

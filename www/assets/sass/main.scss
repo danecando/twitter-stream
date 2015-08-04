@@ -3,5 +3,207 @@
 @import "core/variables";
 @import "uikit/uikit";
 
-body {
+.contain {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.scrollable {
+  overflow-y: auto;
+  webkit-overflow-scrolling: touch;
+}
+
+#app {
+  min-height: 100%;
+}
+
+#app-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: 135px;
+  overflow: hidden;
+  background: #00aced;
+  color: white;
+  border-bottom: 3px solid darken(#00aced, 5);
+
+  .contain {
+    padding: 15px 0;
+  }
+
+  .site-title h2 {
+    color: white;
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    font-size: em(40);
+    text-align: center;
+  }
+
+  .app-nav {
+    padding: 15px 0;
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > div {
+        margin: 0 15px;
+      }
+    }
+
+    .btn-container {
+
+      a {
+        display: block;
+        border: 1px solid white;
+        padding: 5px 15px;
+        color: white;
+        border-radius: 1px;
+        transition: background 200ms ease;
+
+        &:hover {
+          text-decoration: none;
+          background: white;
+          color: #00aced;
+          transition: background 200ms ease;
+        }
+      }
+    }
+  }
+}
+
+#app-main {
+  position: absolute;
+  top: 140px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  webkit-overflow-scrolling: touch;
+  background: #f3f6f9;
+
+  > .contain {
+    margin: 25px auto;
+  }
+
+  .page-title {
+    text-align: center;
+
+  }
+
+  .page-title {
+
+    small {
+      font-size: 65%;
+      color: #666;
+    }
+    .hash {
+      font-weight: 300;
+      color: #00aced;
+      //color: #666;
+    }
+  }
+}
+
+
+.hash-nav {
+  .hash-mark {
+    position: relative;
+    font-size: em(19);
+    left: 18px;
+    color: #00aced !important;
+  }
+  #hash-link-input {
+    border: 0 solid #00aced;
+    box-shadow: 0 0 0;
+    padding: 7px 0;
+    font-size: em(16);
+    border-radius: 1px;
+    font-weight: 300;
+    letter-spacing: 1px;
+
+    &:focus,
+    &:active {
+      box-shadow: 0 0 0;
+      outline: none;
+    }
+  }
+
+  #hash-link {
+    position: relative;
+    background: white;
+    padding: 7.5px 15px;
+    right: 2px;
+    bottom: 1px;
+    border-radius: 1px;
+    border-left: 1px solid #eee;
+    color: #00aced;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+#app-footer {
+  background: darken(#00aced, 5);
+  padding: 5px 0;
+  color: white;
+
+  .site-info {
+    letter-spacing: .5px;
+    text-align: center;
+  }
+
+  a {
+    color: white;
+    font-weight: bold;
+  }
+}
+
+.tweets {
+  list-style-type: none;
+  padding-left: 0;
+
+  .tweet {
+    background: white;
+    padding: 20px 15px;
+    border-radius: 2px;
+    margin-bottom: 25px;
+    border: 1px solid #f5f5f5;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .035);
+    max-width: 600px;
+    margin: 0 auto 25px;
+  }
+
+  .tweet-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .user-name {
+    margin-bottom: 0;
+    font-size: em(20);
+  }
+
+  .profile-pic {
+    flex-shrink: 0;
+    margin-right: 25px;
+
+    img {
+      width: 48px;
+      height: 48px;
+      border-radius: 2px;
+    }
+  }
+
+
 }

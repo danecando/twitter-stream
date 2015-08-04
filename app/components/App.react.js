@@ -10,7 +10,6 @@ var Router = require('react-router');
 
 // components
 var Header = require('./Header.react');
-var Footer = require('./Footer.react');
 
 var RouteHandler = Router.RouteHandler;
 
@@ -20,7 +19,6 @@ var App = React.createClass({
         <div id="app">
           <Header/>
           <RouteHandler/>
-          <Footer/>
         </div>
     );
   }

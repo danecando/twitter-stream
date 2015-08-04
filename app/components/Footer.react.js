@@ -16,11 +16,13 @@ var Footer = React.createClass({
    */
   render: function() {
     return (
-        <header id="app-footer">
+        <footer id="app-footer">
           <div className="contain">
-            <h2>Site Footer</h2>
+            <div className="site-info">
+              A site by <a href="https://twitter.com/danecando">@danecando</a> for my Node4U! presentation at <a href="http://www.meetup.com/Boca-JS">BocaJS</a>
+            </div>
           </div>
-        </header>
+        </footer>
     );
   }
 
