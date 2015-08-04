@@ -83,7 +83,6 @@ var Hash = React.createClass({
     // get initial tweets
     self.getTweets(tag)
         .then(function(tweets) {
-          console.log(tweets[0]);
           self.setState({ tweets: tweets });
         })
         .catch(function(err) {
